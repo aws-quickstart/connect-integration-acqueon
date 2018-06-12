@@ -1,8 +1,11 @@
-global:
-  marketplace-ami: false
-  owner: quickstart-eng@amazon.com
-  qsname: connect-integration-acqueon
-  regions:
+--- 
+global: 
+  owner: aec@acqueon.com
+  qsname: aec-modules
+  regions: 
+    - us-east-2
+    - us-east-1
+    - us-west-2
     - ap-northeast-1
     - ap-northeast-2
     - ap-south-1
@@ -11,17 +14,13 @@ global:
     - ca-central-1
     - eu-central-1
     - eu-west-1
+    - eu-west-2
+    - eu-west-3
     - sa-east-1
-    - us-east-1
-    - us-east-2
-    - us-west-1
-    - us-west-2
   reporting: true
- 
-tests:
-  connect-integration-acqueont1:
-    parameter_input: connect-integration-acqueon-example-params1.json
-    template_file: connect-integration-acqueon-example1.template
-  connect-integration-acqueont2:
-    parameter_input: connect-integration-acqueon-example-params2.json
-    template_file: connect-integration-acqueon-example2.template
+tests: 
+  aec-txl: 
+    regions:
+      - us-east-1
+    parameter_input: txl-input.json
+    template_file: aec-master.template
