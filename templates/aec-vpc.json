@@ -4,20 +4,28 @@
     "Metadata": {
       "AWS::CloudFormation::Interface": {
           "ParameterGroups": [
-              {
-                  "Label": {
-                      "default": "Amazon VPC Configuration"
-                  },
-                  "Parameters": [
-                      "AvailabilityZones",
-                      "VPCCIDR",
-                      "PrivateSubnet1CIDR",
-                      "PrivateSubnet2CIDR",
-                      "PublicSubnet1CIDR",
-                      "PublicSubnet2CIDR",
-                      "KeyPairName"
-                  ]
-              }
+			  {
+				  "Label": {
+					  "default": "Amazon VPC Configuration"
+				  },
+				  "Parameters": [
+					  "AvailabilityZones",
+					  "VPCCIDR",
+					  "PrivateSubnet1CIDR",
+					  "PrivateSubnet2CIDR",
+					  "PublicSubnet1CIDR",
+					  "PublicSubnet2CIDR",
+					  "KeyPairName"
+				  ]
+			  },
+				{
+					"Label": {
+						"default": "SecurityGroup Configuration"
+					},
+					"Parameters": [
+						"RDPFrom"
+					]
+				}
           ],
           "ParameterLabels": {
               "AvailabilityZones": {
@@ -40,6 +48,9 @@
               },
               "VPCCIDR": {
                   "default": "VPC CIDR"
+              },
+              "RDPFrom": {
+                  "default": "RDP From"
               }
           }
       }
