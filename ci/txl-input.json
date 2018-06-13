@@ -32,11 +32,11 @@
     "ParameterValue": "AEC-dbinstance1"
   },
   {
-    "ParameterKey": "DBAdminUser",
+    "ParameterKey": "DBMasterUser",
     "ParameterValue": "sa"
   },
   {
-    "ParameterKey": "DBAdminPassword",
+    "ParameterKey": "DBMasterPassword",
     "ParameterValue": "acqueonpwd"
   },
   {
