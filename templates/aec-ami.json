@@ -9,13 +9,23 @@
                         "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
-                        "KeyName",
-                        "InstanceType",
-                        "VPCID",
-                        "SubnetID",
-                        "ElasticIp",
-                        "WebXface",
-                        "RDPFrom"
+                        "EC2InstanceType",
+                        "KeyPairName",
+                        "AECVPC",
+                        "AECSubnetPublic1",
+                        "AECSubnetPublic2",
+                        "AECSubnetPrivate1",
+                        "AECSubnetPrivate2"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "SecurityGroup Configuration"
+                    },
+                    "Parameters": [
+                        "AECWeb",
+                        "AECPrivateGroup",
+                        "AECRDP"
                     ]
                 },
                 {
@@ -23,37 +33,74 @@
                         "default": "Amazon RDS Configuration"
                     },
                     "Parameters": [
-                        "DBAdminUser",
-                        "DBAdminPassword",
-                        "DBEvaluateUser",
-                        "DBEvaluatePassword"
+                        "RDSDB",
+                        "DBMasterUser",
+                        "DBMasterPassword"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "SSL Configuration"
+                    },
+                    "Parameters": [
+                        "DomainHostedZone",
+                        "CFDomainName",
+                        "CFCertificate",
+                        "ELBCertificate"
                     ]
                 }
             ],
             "ParameterLabels": {
-                "DBAdminPassword": {
-                    "default": "DB Admin Password"
-                },
-                "DBAdminUser": {
-                    "default": "DB Admin User"
-                },
-                "InstanceType": {
+                "EC2InstanceType": {
                     "default": "Instance Type"
                 },
-                "KeyName": {
+                "KeyPairName": {
                     "default": "Key Name"
                 },
-                "RDPFrom": {
-                    "default": "RDP From"
+                "AECVPC": {
+                    "default": "VPC"
                 },
-                "S3Bucket": {
-                    "default": "S3 Bucket"
+                "AECSubnetPublic1": {
+                    "default": "Public Subnet 1"
                 },
-                "SubnetID": {
-                    "default": "Subnet ID"
+                "AECSubnetPublic2": {
+                    "default": "Public Subnet 2"
                 },
-                "VPCID": {
-                    "default": "VPC ID"
+                "AECSubnetPrivate1": {
+                    "default": "Private Subnet 1"
+                },
+                "AECSubnetPrivate2": {
+                    "default": "Private Subnet 2"
+                },
+                "AECWeb": {
+                    "default": "Public ELB SecurityGroup"
+                },
+                "AECPrivateGroup": {
+                    "default": "Private ELB SecurityGroup"
+                },
+                "AECRDP": {
+                    "default": "RDP SecurityGroup"
+                },
+                "RDSDB": {
+                    "default": "DB Instance Name"
+                },
+                "DBMasterPassword": {
+                    "default": "DB Admin Password"
+                },
+                "DBMasterUser": {
+                    "default": "DB Admin User"
+                },
+                "DomainHostedZone": {
+                    "default": "Hosted Zone"
+                },
+                "CFDomainName": {
+                    "default": "CF DomainName"
+                },
+                "CFCertificate": {
+                    "default": "CF Certificate ARN"
+                },
+                "ELBCertificate": {
+                    "default": "ELB Certificate ARN"
                 }
             }
         }
@@ -76,30 +123,17 @@
             "Type": "AWS::EC2::KeyPair::KeyName",
             "ConstraintDescription": "must be the name of an existing EC2 KeyPair."
         },
-        "CFDomainName": {
-            "Description": "Alternate domain name for CloudFront",
-            "Type": "String"
-        },
-        "CFCertificate": {
-            "Description": "Certificate ARN for CloudFront. (Need to be created/imported in us-east-1 region)",
-            "Type": "String"
-        },
-        "ELBCertificate": {
-            "Description": "Certificate ARN for ELB. (Need to be created/imported in stack region )",
-            "Type": "String"
-        },
-        "DomainHostedZone": {
-            "Description": "Hosted Zone of the Domain",
-            "Type": "AWS::Route53::HostedZone::Id"
-        },
         "AECWeb": {
-            "Type": "AWS::EC2::SecurityGroup::Id"
+            "Type": "AWS::EC2::SecurityGroup::Id",
+            "Description": "SecurityGroup for Public ELB"
         },
         "AECPrivateGroup": {
-            "Type": "AWS::EC2::SecurityGroup::Id"
+            "Type": "AWS::EC2::SecurityGroup::Id",
+            "Description": "SecurityGroup for Private ELB"
         },
         "AECRDP": {
-            "Type": "AWS::EC2::SecurityGroup::Id"
+            "Type": "AWS::EC2::SecurityGroup::Id",
+            "Description": "SecurityGroup for BastionHost RDP"
         },
         "AECSubnetPublic1": {
             "Type": "AWS::EC2::Subnet::Id"
@@ -117,22 +151,37 @@
             "Type": "AWS::EC2::VPC::Id"
         },
         "RDSDB": {
+            "Description": "RDS DB Instance Name",
             "Type": "String"
         },
-        "DBAdminUser": {
+        "DBMasterUser": {
             "Description": "RDS Master UserName",
             "Type": "String",
             "MinLength": "2",
-            "MaxLength": "25",
-            "Default": "sa"
+            "MaxLength": "25"
         },
-        "DBAdminPassword": {
+        "DBMasterPassword": {
             "Description": "RDS Master Password",
             "Type": "String",
             "MinLength": "3",
             "MaxLength": "25",
-            "Default": "acqueonpwd",
             "NoEcho": true
+        },
+        "CFDomainName": {
+            "Description": "Alternate domain name for CloudFront",
+            "Type": "String"
+        },
+        "CFCertificate": {
+            "Description": "Certificate ARN for CloudFront. (Need to be created/imported in us-east-1 region)",
+            "Type": "String"
+        },
+        "ELBCertificate": {
+            "Description": "Certificate ARN for ELB. (Need to be created/imported in stack region )",
+            "Type": "String"
+        },
+        "DomainHostedZone": {
+            "Description": "Hosted Zone of the Domain",
+            "Type": "AWS::Route53::HostedZone::Id"
         }
     },
     "Mappings": {
@@ -925,12 +974,12 @@
                                 "\",",
                                 "\"RDS_USERNAME\":\"",
                                 {
-                                    "Ref": "DBAdminUser"
+                                    "Ref": "DBMasterUser"
                                 },
                                 "\",",
                                 "\"RDS_PASSWORD\":\"",
                                 {
-                                    "Ref": "DBAdminPassword"
+                                    "Ref": "DBMasterPassword"
                                 },
                                 "\"",
                                 "}'",

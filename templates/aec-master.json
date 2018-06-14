@@ -11,10 +11,10 @@
                     "Parameters": [
                         "AvailabilityZones",
                         "VPCCIDR",
-                        "PrivateSubnet1CIDR",
-                        "PrivateSubnet2CIDR",
                         "PublicSubnet1CIDR",
                         "PublicSubnet2CIDR",
+                        "PrivateSubnet1CIDR",
+                        "PrivateSubnet2CIDR",
                         "KeyPairName"
                     ]
                 },
@@ -23,7 +23,7 @@
                         "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
-                        "InstanceType",
+                        "EC2InstanceType",
                         "RDPFrom"
                     ]
                 },
@@ -32,35 +32,29 @@
                         "default": "Amazon RDS Configuration"
                     },
                     "Parameters": [
-                        "DBAdminUser",
-                        "DBAdminPassword",
+                        "RDSDBInstanceName",
+                        "DBMasterUser",
+                        "DBMasterPassword"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "Amazon Route53 Configuration"
+                    },
+                    "Parameters": [
+                        "DomainHostedZone",
+                        "CFDomainName",
+                        "CFCertificate",
+                        "ELBCertificate"
                     ]
                 }
             ],
             "ParameterLabels": {
+                "VPCCIDR": {
+                    "default": "VPC CIDR"
+                },
                 "AvailabilityZones": {
                     "default": "Availability Zones"
-                },
-                "DBName": {
-                    "default": "Database Name"
-                },
-                "DBPort": {
-                    "default": "Database Port"
-                },
-                "DBPwd": {
-                    "default": "Master User Password"
-                },
-                "DBUser": {
-                    "default": "Master User Name"
-                },
-                "KeyPairName": {
-                    "default": "Key Pair Name"
-                },
-                "PrivateSubnet1CIDR": {
-                    "default": "Private Subnet 1 CIDR"
-                },
-                "PrivateSubnet2CIDR": {
-                    "default": "Private Subnet 2 CIDR"
                 },
                 "PublicSubnet1CIDR": {
                     "default": "Public Subnet 1 CIDR"
@@ -68,20 +62,41 @@
                 "PublicSubnet2CIDR": {
                     "default": "Public Subnet 2 CIDR"
                 },
-                "VPCCIDR": {
-                    "default": "VPC CIDR"
+                "PrivateSubnet1CIDR": {
+                    "default": "Private Subnet 1 CIDR"
                 },
-                "InstanceType": {
-                    "default": "Instance Type"
+                "PrivateSubnet2CIDR": {
+                    "default": "Private Subnet 2 CIDR"
                 },
                 "RDPFrom": {
                     "default": "RDP From"
                 },
-                "DBAdminUser": {
-                    "default": "DB Admin User"
+                "RDSDBInstanceName": {
+                    "default": "Instance Name"
                 },
-                "DBAdminPassword": {
-                    "default": "DB Admin Password"
+                "DBMasterUser": {
+                    "default": "DB Master User"
+                },
+                "DBMasterPassword": {
+                    "default": "DB Master Password"
+                },
+                "EC2InstanceType": {
+                    "default": "Instance Type"
+                },
+                "KeyPairName": {
+                    "default": "Key Name"
+                },
+                "DomainHostedZone": {
+                    "default": "Hosted Zone"
+                },
+                "CFDomainName": {
+                    "default": "CF DomainName"
+                },
+                "CFCertificate": {
+                    "default": "CF Certificate ARN"
+                },
+                "ELBCertificate": {
+                    "default": "ELB Certificate ARN"
                 }
             }
         }
@@ -152,19 +167,17 @@
             "MaxLength": "25",
             "Default": "AEC-dbinstance1"
         },
-        "DBAdminUser": {
+        "DBMasterUser": {
             "Description": "RDS Master UserName",
             "Type": "String",
             "MinLength": "2",
-            "MaxLength": "25",
-            "Default": "sa"
+            "MaxLength": "25"
         },
-        "DBAdminPassword": {
+        "DBMasterPassword": {
             "Description": "RDS Master Password",
             "Type": "String",
             "MinLength": "3",
             "MaxLength": "25",
-            "Default": "acqueonpwd",
             "NoEcho": true
         },
         "EC2InstanceType": {
@@ -197,122 +210,8 @@
             "Type": "String"
         },
         "DomainHostedZone": {
-            "Description": "Hosted Zone of the Domain",
+            "Description": "Hosted Zone of the Domain (Required)",
             "Type": "AWS::Route53::HostedZone::Id"
-        }
-    },
-    "Metadata": {
-        "AWS::CloudFormation::Interface": {
-            "ParameterGroups": [
-                {
-                    "Label": {
-                        "default": "VPC Configuration"
-                    },
-                    "Parameters": [
-                        "VPCCIDR"
-                    ]
-                },
-                {
-                    "Label": {
-                        "default": "Subnet Configuration"
-                    },
-                    "Parameters": [
-                        "AvailabilityZones",
-                        "PublicSubnet1CIDR",
-                        "PublicSubnet2CIDR",
-                        "PrivateSubnet1CIDR",
-                        "PrivateSubnet2CIDR"
-                    ]
-                },
-                {
-                    "Label": {
-                        "default": "SecurityGroup Configuration"
-                    },
-                    "Parameters": [
-                        "RDPFrom"
-                    ]
-                },
-                {
-                    "Label": {
-                        "default": "RDS Configuration"
-                    },
-                    "Parameters": [
-                        "RDSDBInstanceName",
-                        "DBAdminUser",
-                        "DBAdminPassword"
-                    ]
-                },
-                {
-                    "Label": {
-                        "default": "EC2 Configuration"
-                    },
-                    "Parameters": [
-                        "EC2InstanceType",
-                        "KeyPairName"
-                    ]
-                },
-                {
-                    "Label": {
-                        "default": "SSL Configuration"
-                    },
-                    "Parameters": [
-                        "DomainHostedZone",
-                        "CFDomainName",
-                        "CFCertificate",
-                        "ELBCertificate"
-                    ]
-                }
-            ],
-            "ParameterLabels": {
-                "VPCCIDR": {
-                    "default": "VPC CIDR"
-                },
-                "AvailabilityZones": {
-                    "default": "Availability Zones"
-                },
-                "PublicSubnet1CIDR": {
-                    "default": "Public Subnet 1 CIDR"
-                },
-                "PublicSubnet2CIDR": {
-                    "default": "Public Subnet 2 CIDR"
-                },
-                "PrivateSubnet1CIDR": {
-                    "default": "Private Subnet 1 CIDR"
-                },
-                "PrivateSubnet2CIDR": {
-                    "default": "Private Subnet 2 CIDR"
-                },
-                "RDPFrom": {
-                    "default": "RDP From"
-                },
-                "RDSDBInstanceName": {
-                    "default": "Instance Name"
-                },
-                "DBAdminUser": {
-                    "default": "DB Admin User"
-                },
-                "DBAdminPassword": {
-                    "default": "DB Admin Password"
-                },
-                "EC2InstanceType": {
-                    "default": "Instance Type"
-                },
-                "KeyPairName": {
-                    "default": "Key Name"
-                },
-                "DomainHostedZone": {
-                    "default": "Hosted Zone"
-                },
-                "CFDomainName": {
-                    "default": "CF DomainName"
-                },
-                "CFCertificate": {
-                    "default": "CF Certificate ARN"
-                },
-                "ELBCertificate": {
-                    "default": "ELB Certificate ARN"
-                }
-            }
         }
     },
     "Conditions": {
@@ -370,7 +269,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-vpc.template"
+                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-vpc.json"
                 },
                 "Parameters": {
                     "VPCCIDR": {
@@ -406,7 +305,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-rds.template"
+                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-rds.json"
                 },
                 "Parameters": {
                     "AECSubnetPrivate1": {
@@ -430,11 +329,11 @@
                     "RDSDBInstanceName": {
                         "Ref": "RDSDBInstanceName"
                     },
-                    "DBAdminUser": {
-                        "Ref": "DBAdminUser"
+                    "DBMasterUser": {
+                        "Ref": "DBMasterUser"
                     },
-                    "DBAdminPassword": {
-                        "Ref": "DBAdminPassword"
+                    "DBMasterPassword": {
+                        "Ref": "DBMasterPassword"
                     },
                     "EC2InstanceType": {
                         "Ref": "EC2InstanceType"
@@ -446,7 +345,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-ami.template"
+                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-ami.json"
                 },
                 "Parameters": {
                     "EC2InstanceType": {
@@ -509,11 +408,11 @@
                             "Outputs.AECVPC"
                         ]
                     },
-                    "DBAdminUser": {
-                        "Ref": "DBAdminUser"
+                    "DBMasterUser": {
+                        "Ref": "DBMasterUser"
                     },
-                    "DBAdminPassword": {
-                        "Ref": "DBAdminPassword"
+                    "DBMasterPassword": {
+                        "Ref": "DBMasterPassword"
                     },
                     "AECRDP": {
                         "Fn::GetAtt": [

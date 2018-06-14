@@ -9,8 +9,8 @@
                         "default": "Amazon RDS Configuration"
                     },
                     "Parameters": [
-                        "DBAdminUser",
-                        "DBAdminPassword",
+                        "DBMasterUser",
+                        "DBMasterPassword",
                         "EC2InstanceType",
                         "RDSDBInstanceName",
                         "AECPrivateGroup",
@@ -26,10 +26,10 @@
                 "RDSDBInstanceName": {
                     "default": "RDS Instance Name"
                 },
-                "DBAdminUser": {
+                "DBMasterUser": {
                     "default": "DB Admin User"
                 },
-                "DBAdminPassword": {
+                "DBMasterPassword": {
                     "default": "DB Admin Password"
                 },
                 "AECPrivateGroup": {
@@ -52,19 +52,17 @@
             "MaxLength": "25",
             "Default": "AEC-dbinstance1"
         },
-        "DBAdminUser": {
+        "DBMasterUser": {
             "Description": "RDS Master UserName",
             "Type": "String",
             "MinLength": "2",
-            "MaxLength": "25",
-            "Default": "sa"
+            "MaxLength": "25"
         },
-        "DBAdminPassword": {
+        "DBMasterPassword": {
             "Description": "RDS Master Password",
             "Type": "String",
             "MinLength": "3",
             "MaxLength": "25",
-            "Default": "acqueonpwd",
             "NoEcho": true
         },
         "EC2InstanceType": {
@@ -292,10 +290,10 @@
                 "MultiAZ": true,
                 "PubliclyAccessible": false,
                 "MasterUsername": {
-                    "Ref": "DBAdminUser"
+                    "Ref": "DBMasterUser"
                 },
                 "MasterUserPassword": {
-                    "Ref": "DBAdminPassword"
+                    "Ref": "DBMasterPassword"
                 },
                 "DBSubnetGroupName": {
                     "Ref": "RDSSubnetGroup"

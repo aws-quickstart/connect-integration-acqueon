@@ -2,48 +2,59 @@
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "Acqueon Engagement Cloud (Worker Template) for Amazon Connect (qs-)",
     "Metadata": {
-      "AWS::CloudFormation::Interface": {
-          "ParameterGroups": [
-              {
-                  "Label": {
-                      "default": "Amazon VPC Configuration"
-                  },
-                  "Parameters": [
-                      "AvailabilityZones",
-                      "VPCCIDR",
-                      "PrivateSubnet1CIDR",
-                      "PrivateSubnet2CIDR",
-                      "PublicSubnet1CIDR",
-                      "PublicSubnet2CIDR",
-                      "KeyPairName"
-                  ]
-              }
-          ],
-          "ParameterLabels": {
-              "AvailabilityZones": {
-                  "default": "Availability Zones"
-              },
-              "KeyPairName": {
-                  "default": "Key Pair Name"
-              },
-              "PrivateSubnet1CIDR": {
-                  "default": "Private Subnet 1 CIDR"
-              },
-              "PrivateSubnet2CIDR": {
-                  "default": "Private Subnet 2 CIDR"
-              },
-              "PublicSubnet1CIDR": {
-                  "default": "Public Subnet 1 CIDR"
-              },
-              "PublicSubnet2CIDR": {
-                  "default": "Public Subnet 2 CIDR"
-              },
-              "VPCCIDR": {
-                  "default": "VPC CIDR"
-              }
-          }
-      }
-  },
+        "AWS::CloudFormation::Interface": {
+            "ParameterGroups": [
+                {
+                    "Label": {
+                        "default": "Amazon VPC Configuration"
+                    },
+                    "Parameters": [
+                        "AvailabilityZones",
+                        "VPCCIDR",
+                        "PrivateSubnet1CIDR",
+                        "PrivateSubnet2CIDR",
+                        "PublicSubnet1CIDR",
+                        "PublicSubnet2CIDR",
+                        "KeyPairName"
+                    ]
+                },
+                {
+                    "Label": {
+                        "default": "SecurityGroup Configuration"
+                    },
+                    "Parameters": [
+                        "RDPFrom"
+                    ]
+                }
+            ],
+            "ParameterLabels": {
+                "AvailabilityZones": {
+                    "default": "Availability Zones"
+                },
+                "KeyPairName": {
+                    "default": "Key Pair Name"
+                },
+                "PrivateSubnet1CIDR": {
+                    "default": "Private Subnet 1 CIDR"
+                },
+                "PrivateSubnet2CIDR": {
+                    "default": "Private Subnet 2 CIDR"
+                },
+                "PublicSubnet1CIDR": {
+                    "default": "Public Subnet 1 CIDR"
+                },
+                "PublicSubnet2CIDR": {
+                    "default": "Public Subnet 2 CIDR"
+                },
+                "VPCCIDR": {
+                    "default": "VPC CIDR"
+                },
+                "RDPFrom": {
+                    "default": "RDP From"
+                }
+            }
+        }
+    },
     "Parameters": {
         "VPCCIDR": {
             "Description": "The IP address range for VPC",
