@@ -1,7 +1,7 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
     "Description": "Acqueon Engagement Cloud (Master Template) for Amazon Connect (qs-)",
-	"Metadata": {
+    "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
                 {
@@ -10,7 +10,7 @@
                     },
                     "Parameters": [
                         "AvailabilityZones",
-						"VPCCIDR",
+                        "VPCCIDR",
                         "PublicSubnet1CIDR",
                         "PublicSubnet2CIDR",
                         "PrivateSubnet1CIDR",
@@ -24,7 +24,7 @@
                     },
                     "Parameters": [
                         "EC2InstanceType",
-						"RDPFrom"
+                        "RDPFrom"
                     ]
                 },
                 {
@@ -171,15 +171,13 @@
             "Description": "RDS Master UserName",
             "Type": "String",
             "MinLength": "2",
-            "MaxLength": "25",
-            "Default": "sa"
+            "MaxLength": "25"
         },
         "DBMasterPassword": {
             "Description": "RDS Master Password",
             "Type": "String",
             "MinLength": "3",
             "MaxLength": "25",
-            "Default": "acqueonpwd",
             "NoEcho": true
         },
         "EC2InstanceType": {
@@ -271,7 +269,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-vpc.template"
+                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-vpc.json"
                 },
                 "Parameters": {
                     "VPCCIDR": {
@@ -307,7 +305,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-rds.template"
+                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-rds.json"
                 },
                 "Parameters": {
                     "AECSubnetPrivate1": {
@@ -347,7 +345,7 @@
             "Type": "AWS::CloudFormation::Stack",
             "Properties": {
                 "TemplateURL": {
-                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-ami.template"
+                    "Fn::Sub": "https://s3.amazonaws.com/connect-b561029704a4/aecmodule/aec-ami.json"
                 },
                 "Parameters": {
                     "EC2InstanceType": {
