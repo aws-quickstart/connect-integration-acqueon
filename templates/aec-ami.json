@@ -10,32 +10,32 @@
                     },
                     "Parameters": [
                         "EC2InstanceType",
-						"KeyPairName",
+                        "KeyPairName",
                         "AECVPC",
                         "AECSubnetPublic1",
-						"AECSubnetPublic2",
-						"AECSubnetPrivate1",
-						"AECSubnetPrivate2"
+                        "AECSubnetPublic2",
+                        "AECSubnetPrivate1",
+                        "AECSubnetPrivate2"
                     ]
                 },
-				{
-					"Label": {
-						"default": "SecurityGroup Configuration"
-					},
-					"Parameters": [
-						"AECWeb",
-						"AECPrivateGroup",
-						"AECRDP"
-					]
-				},
+                {
+                    "Label": {
+                        "default": "SecurityGroup Configuration"
+                    },
+                    "Parameters": [
+                        "AECWeb",
+                        "AECPrivateGroup",
+                        "AECRDP"
+                    ]
+                },
                 {
                     "Label": {
                         "default": "Amazon RDS Configuration"
                     },
                     "Parameters": [
-						"RDSDB",
+                        "RDSDB",
                         "DBMasterUser",
-                        "DBMasterPassword"						
+                        "DBMasterPassword"
                     ]
                 },
                 {
@@ -43,24 +43,24 @@
                         "default": "SSL Configuration"
                     },
                     "Parameters": [
-						"DomainHostedZone",
+                        "DomainHostedZone",
                         "CFDomainName",
-                        "CFCertificate" ,
-						"ELBCertificate"                       
+                        "CFCertificate",
+                        "ELBCertificate"
                     ]
                 }
             ],
             "ParameterLabels": {
-				"EC2InstanceType": {
+                "EC2InstanceType": {
                     "default": "Instance Type"
                 },
                 "KeyPairName": {
                     "default": "Key Name"
                 },
-				"AECVPC": {
+                "AECVPC": {
                     "default": "VPC"
                 },
-				"AECSubnetPublic1": {
+                "AECSubnetPublic1": {
                     "default": "Public Subnet 1"
                 },
                 "AECSubnetPublic2": {
@@ -81,7 +81,7 @@
                 "AECRDP": {
                     "default": "RDP SecurityGroup"
                 },
-				"RDSDB": {
+                "RDSDB": {
                     "default": "DB Instance Name"
                 },
                 "DBMasterPassword": {
@@ -125,15 +125,15 @@
         },
         "AECWeb": {
             "Type": "AWS::EC2::SecurityGroup::Id",
-			"Description": "SecurityGroup for Public ELB"
+            "Description": "SecurityGroup for Public ELB"
         },
         "AECPrivateGroup": {
             "Type": "AWS::EC2::SecurityGroup::Id",
-			"Description": "SecurityGroup for Private ELB"
+            "Description": "SecurityGroup for Private ELB"
         },
         "AECRDP": {
             "Type": "AWS::EC2::SecurityGroup::Id",
-			"Description": "SecurityGroup for BastionHost RDP"
+            "Description": "SecurityGroup for BastionHost RDP"
         },
         "AECSubnetPublic1": {
             "Type": "AWS::EC2::Subnet::Id"
@@ -151,22 +151,20 @@
             "Type": "AWS::EC2::VPC::Id"
         },
         "RDSDB": {
-			"Description": "RDS DB Instance Name",
+            "Description": "RDS DB Instance Name",
             "Type": "String"
         },
         "DBMasterUser": {
             "Description": "RDS Master UserName",
             "Type": "String",
             "MinLength": "2",
-            "MaxLength": "25",
-            "Default": "sa"
+            "MaxLength": "25"
         },
         "DBMasterPassword": {
             "Description": "RDS Master Password",
             "Type": "String",
             "MinLength": "3",
             "MaxLength": "25",
-            "Default": "acqueonpwd",
             "NoEcho": true
         },
         "CFDomainName": {
