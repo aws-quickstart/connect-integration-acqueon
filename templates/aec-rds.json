@@ -56,15 +56,13 @@
             "Description": "RDS Master UserName",
             "Type": "String",
             "MinLength": "2",
-            "MaxLength": "25",
-            "Default": "sa"
+            "MaxLength": "25"
         },
         "DBMasterPassword": {
             "Description": "RDS Master Password",
             "Type": "String",
             "MinLength": "3",
             "MaxLength": "25",
-            "Default": "acqueonpwd",
             "NoEcho": true
         },
         "EC2InstanceType": {
