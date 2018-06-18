@@ -27,10 +27,10 @@
                     "default": "RDS Instance Name"
                 },
                 "DBMasterUser": {
-                    "default": "DB Admin User"
+                    "default": "DB Master User"
                 },
                 "DBMasterPassword": {
-                    "default": "DB Admin Password"
+                    "default": "DB Master Password"
                 },
                 "AECPrivateGroup": {
                     "default": "AEC Private Group"
