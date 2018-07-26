@@ -230,7 +230,7 @@
         "RegionMap": {
             "us-east-1": {
                 "asimg": "ami-0f4c695fd8445c0e1",
-                "bastionimg": "ami-0327667c	"
+                "bastionimg": "ami-0327667c"
             },
             "us-east-2": {
                 "asimg": "ami-06e8f20ffc96a4645",
