@@ -84,11 +84,11 @@
                 "RDSDB": {
                     "default": "DB Instance Name"
                 },
-                "DBMasterPassword": {
-                    "default": "DB Admin Password"
-                },
                 "DBMasterUser": {
-                    "default": "DB Admin User"
+                    "default": "DB Master User"
+                },
+                "DBMasterPassword": {
+                    "default": "DB Master Password"
                 },
                 "DomainHostedZone": {
                     "default": "Hosted Zone"
@@ -229,64 +229,64 @@
         },
         "RegionMap": {
             "us-east-1": {
-                "asimg": "ami-29642356",
-                "bastionimg": "ami-6b6e2914"
+                "asimg": "ami-0f4c695fd8445c0e1",
+                "bastionimg": "ami-0327667c	"
             },
             "us-east-2": {
-                "asimg": "ami-b9241adc",
-                "bastionimg": "ami-d02719b5"
+                "asimg": "ami-06e8f20ffc96a4645",
+                "bastionimg": "ami-3bfac45e"
             },
             "us-west-1": {
-                "asimg": "ami-0de80c6e",
-                "bastionimg": "ami-afed09cc"
+                "asimg": "ami-002cfb5216ff28160",
+                "bastionimg": "ami-b236d2d1"
             },
             "us-west-2": {
-                "asimg": "ami-c82063b0",
-                "bastionimg": "ami-4f0b4837"
-            },
-            "ap-northeast-1": {
-                "asimg": "ami-e0905c9f",
-                "bastionimg": "ami-2b955954"
-            },
-            "ap-northeast-2": {
-                "asimg": "ami-36892358",
-                "bastionimg": "ami-238e244d"
+                "asimg": "ami-0496f7129db464e84",
+                "bastionimg": "ami-3703414f"
             },
             "ap-south-1": {
-                "asimg": "ami-34c1e95b",
-                "bastionimg": "ami-d1cee6be"
+                "asimg": "ami-0891aa7ada43108dc",
+                "bastionimg": "ami-5f95bd30"
+            },
+            "ap-northeast-2": {
+                "asimg": "ami-0e1462902399cbfc1",
+                "bastionimg": "ami-7969c317"
             },
             "ap-southeast-1": {
-                "asimg": "ami-47ddd93b",
-                "bastionimg": "ami-a5ece8d9"
+                "asimg": "ami-0aed2c7b297e1ee4a",
+                "bastionimg": "ami-053d3a79"
             },
             "ap-southeast-2": {
-                "asimg": "ami-60934c02",
-                "bastionimg": "ami-20954a42"
+                "asimg": "ami-0066ecd19ec238273",
+                "bastionimg": "ami-42f02f20"
+            },
+            "ap-northeast-1": {
+                "asimg": "ami-05a3299aedc046ede",
+                "bastionimg": "ami-120cc36d"
             },
             "ca-central-1": {
-                "asimg": "ami-2a7bf84e",
-                "bastionimg": "ami-dd75f6b9"
+                "asimg": "ami-09c30501f9b5da287",
+                "bastionimg": "ami-140b8870"
             },
             "eu-central-1": {
-                "asimg": "ami-38a292d3",
-                "bastionimg": "ami-5ec5f5b5"
+                "asimg": "ami-08902bffb18c2cbff",
+                "bastionimg": "ami-63f5c688"
             },
             "eu-west-1": {
-                "asimg": "ami-d9666ba0",
-                "bastionimg": "ami-78676a01"
+                "asimg": "ami-077174156290afed8",
+                "bastionimg": "ami-987a76e1"
             },
             "eu-west-2": {
-                "asimg": "ami-9ba648fc",
-                "bastionimg": "ami-19a54b7e"
+                "asimg": "ami-08b83147db80249a3",
+                "bastionimg": "ami-479b7520"
             },
             "eu-west-3": {
-                "asimg": "ami-1228996f",
-                "bastionimg": "ami-dd2998a0"
+                "asimg": "ami-0327b2819272d7fc1",
+                "bastionimg": "ami-1511a068"
             },
             "sa-east-1": {
-                "asimg": "ami-253f6449",
-                "bastionimg": "ami-6328730f"
+                "asimg": "ami-0ee0981fa59a3224f",
+                "bastionimg": "ami-ff6e3593"
             }
         }
     },
