@@ -268,7 +268,7 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aws-vpc.template"
+					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/submodules/quickstart-aws-vpc/templates/aws-vpc.template"
 				},
 				"Parameters": {
 					"AvailabilityZones": {
@@ -305,7 +305,7 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aec-security.json"
+					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/templates/aec-security.json"
 				},
 				"Parameters": {
                     "AECVPC": {
@@ -327,7 +327,7 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aec-rds.json"
+					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/templates/aec-rds.json"
 				},
 				"Parameters": {
 					"AECSubnetPrivate1": {
@@ -367,7 +367,7 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aec-ami.json"
+					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/templates/aec-ami.json"
 				},
 				"Parameters": {
 					"EC2InstanceType": {
