@@ -229,7 +229,11 @@
         },
         "RegionMap": {
             "us-east-1": {
+<<<<<<< HEAD
                 "asimg": "ami-012cc189997301fa4",
+=======
+                "asimg": "ami-0f4c695fd8445c0e1",
+>>>>>>> upstream/develop
                 "bastionimg": "ami-0327667c"
             },
             "us-east-2": {
