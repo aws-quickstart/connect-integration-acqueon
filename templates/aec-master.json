@@ -1,6 +1,6 @@
 {
 	"AWSTemplateFormatVersion": "2010-09-09",
-	"Description": "Acqueon Engagement Cloud (Master Template) for Amazon Connect (qs-)",
+	"Description": "Acqueon Engagement Cloud (Master Template) for Amazon Connect (qs-1onqkqsbo)",
 	"Metadata": {
 		"AWS::CloudFormation::Interface": {
 			"ParameterGroups": [

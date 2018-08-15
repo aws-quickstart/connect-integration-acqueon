@@ -1,6 +1,6 @@
 {
     "AWSTemplateFormatVersion": "2010-09-09",
-    "Description": "Acqueon Engagement Cloud (Worker Template) for Amazon Connect (qs-)",
+    "Description": "Acqueon Engagement Cloud (Worker Template) for Amazon Connect (qs-1onqkqsbt)",
     "Metadata": {
         "AWS::CloudFormation::Interface": {
             "ParameterGroups": [
