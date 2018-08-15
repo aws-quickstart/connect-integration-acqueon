@@ -3,43 +3,52 @@
 	"Description": "Acqueon Engagement Cloud (Master Template) for Amazon Connect (qs-)",
 	"Metadata": {
 		"AWS::CloudFormation::Interface": {
-			"ParameterGroups": [{
+			"ParameterGroups": [
+			{
 				"Label": {
 					"default": "Amazon VPC Configuration"
 				},
-				"Parameters": ["AvailabilityZones",
-				"VPCCIDR",
-				"PublicSubnet1CIDR",
-				"PublicSubnet2CIDR",
-				"PrivateSubnet1CIDR",
-				"PrivateSubnet2CIDR",
-				"KeyPairName"]
+				"Parameters": [
+					"AvailabilityZones",
+					"VPCCIDR",
+					"PublicSubnet1CIDR",
+					"PublicSubnet2CIDR",
+					"PrivateSubnet1CIDR",
+					"PrivateSubnet2CIDR",
+					"KeyPairName"
+				]
 			},
 			{
 				"Label": {
 					"default": "Amazon EC2 Configuration"
 				},
-				"Parameters": ["EC2InstanceType",
-				"RDPFrom",
-				"HighAvailability"]
+				"Parameters": [
+					"EC2InstanceType",
+					"RDPFrom"
+				]
 			},
 			{
 				"Label": {
 					"default": "Amazon RDS Configuration"
 				},
-				"Parameters": ["RDSDBInstanceName",
-				"DBMasterUser",
-				"DBMasterPassword"]
+				"Parameters": [
+					"RDSDBInstanceName",
+					"DBMasterUser",
+					"DBMasterPassword"
+				]
 			},
 			{
 				"Label": {
 					"default": "Amazon Route53 Configuration"
 				},
-				"Parameters": ["DomainHostedZone",
-				"CFDomainName",
-				"CFCertificate",
-				"ELBCertificate"]
-			}],
+				"Parameters": [
+					"DomainHostedZone",
+					"CFDomainName",
+					"CFCertificate",
+					"ELBCertificate"
+				]
+			}
+		],
 			"ParameterLabels": {
 				"VPCCIDR": {
 					"default": "VPC CIDR"
@@ -71,9 +80,6 @@
 				"DBMasterPassword": {
 					"default": "DB Master Password"
 				},
-				"HighAvailability": {
-					"default": "High Availability"
-				},
 				"EC2InstanceType": {
 					"default": "Instance Type"
 				},
@@ -101,7 +107,7 @@
 			"Type": "String",
 			"MinLength": "9",
 			"MaxLength": "18",
-			"Default": "10.150.0.0/16",
+			"Default": "10.100.0.0/16",
 			"AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
 			"ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
 		},
@@ -114,7 +120,7 @@
 			"Type": "String",
 			"MinLength": "9",
 			"MaxLength": "18",
-			"Default": "10.150.1.0/24",
+			"Default": "10.100.1.0/24",
 			"AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
 			"ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
 		},
@@ -123,7 +129,7 @@
 			"Type": "String",
 			"MinLength": "9",
 			"MaxLength": "18",
-			"Default": "10.150.2.0/24",
+			"Default": "10.100.2.0/24",
 			"AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
 			"ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
 		},
@@ -132,7 +138,7 @@
 			"Type": "String",
 			"MinLength": "9",
 			"MaxLength": "18",
-			"Default": "10.150.3.0/24",
+			"Default": "10.100.3.0/24",
 			"AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
 			"ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
 		},
@@ -141,7 +147,7 @@
 			"Type": "String",
 			"MinLength": "9",
 			"MaxLength": "18",
-			"Default": "10.150.4.0/24",
+			"Default": "10.100.4.0/24",
 			"AllowedPattern": "(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})\\.(\\d{1,3})/(\\d{1,2})",
 			"ConstraintDescription": "must be a valid IP CIDR range of the form x.x.x.x/x."
 		},
@@ -173,21 +179,16 @@
 			"MaxLength": "25",
 			"NoEcho": true
 		},
-		"HighAvailability": {
-			"Type": "String",
-			"Default": "Enable",
-			"AllowedValues": ["Enable",
-			"Disable"],
-			"Description": "Multi-AZ deployment for RDS and EC2 instance."
-		},
 		"EC2InstanceType": {
 			"Type": "String",
 			"Default": "Option-1a",
-			"AllowedValues": ["Option-1a",
-			"Option-1b",
-			"Option-2a",
-			"Option-2b",
-			"Option-3"],
+			"AllowedValues": [
+				"Option-1a",
+				"Option-1b",
+				"Option-2a",
+				"Option-2b",
+				"Option-3"
+			],
 			"Description": "Refer 'AEC Capacity and Sizing section' of 'AEC Installation Guide' to select appropriate EC2 InstanceType"
 		},
 		"KeyPairName": {
@@ -214,42 +215,52 @@
 	},
 	"Conditions": {
 		"HasHttps": {
-			"Fn::And": [{
-				"Fn::Not": [{
-					"Fn::Equals": ["",
-					{
-						"Ref": "CFDomainName"
-					}]
-				}]
-			},
-			{
-				"Fn::Not": [{
-					"Fn::Equals": ["",
-					{
-						"Ref": "CFCertificate"
-					}]
-				}]
-			},
-			{
-				"Fn::Not": [{
-					"Fn::Equals": ["",
-					{
-						"Ref": "ELBCertificate"
-					}]
-				}]
-			}]
+			"Fn::And": [
+				{
+					"Fn::Not": [
+						{
+							"Fn::Equals": [
+								"",
+								{
+									"Ref": "CFDomainName"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Fn::Not": [
+						{
+							"Fn::Equals": [
+								"",
+								{
+									"Ref": "CFCertificate"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Fn::Not": [
+						{
+							"Fn::Equals": [
+								"",
+								{
+									"Ref": "ELBCertificate"
+								}
+							]
+						}
+					]
+				}
+			]
 		},
 		"West3Region": {
-			"Fn::Equals": ["eu-west-3",
-			{
-				"Ref": "AWS::Region"
-			}]
-		},
-		"IsHighAvailability": {
-			"Fn::Equals": ["Enable",
-			{
-				"Ref": "HighAvailability"
-			}]
+			"Fn::Equals": [
+				"eu-west-3",
+				{
+					"Ref": "AWS::Region"
+				}
+			]
 		}
 	},
 	"Resources": {
@@ -257,7 +268,7 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/submodules/quickstart-aws-vpc/templates/aws-vpc.template"
+					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aws-vpc.template"
 				},
 				"Parameters": {
 					"AvailabilityZones": {
@@ -294,12 +305,14 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/templates/aec-security.json"
+					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aec-security.json"
 				},
 				"Parameters": {
                     "AECVPC": {
-                        "Fn::GetAtt": ["VPCStack",
-						"Outputs.VPCID"]
+                        "Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.VPCID"
+						]
                     },
                     "VPCCIDR": {
                         "Ref": "VPCCIDR"
@@ -314,20 +327,26 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/templates/aec-rds.json"
+					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aec-rds.json"
 				},
 				"Parameters": {
 					"AECSubnetPrivate1": {
-						"Fn::GetAtt": ["VPCStack",
-						"Outputs.PrivateSubnet1AID"]
+						"Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.PrivateSubnet1AID"
+						]
 					},
 					"AECSubnetPrivate2": {
-						"Fn::GetAtt": ["VPCStack",
-						"Outputs.PrivateSubnet2AID"]
+						"Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.PrivateSubnet2AID"
+						]
 					},
 					"AECPrivateGroup": {
-						"Fn::GetAtt": ["SecurityStack",
-						"Outputs.AECPrivateGroup"]
+						"Fn::GetAtt": [
+							"SecurityStack",
+							"Outputs.AECPrivateGroup"
+						]
 					},
 					"RDSDBInstanceName": {
 						"Ref": "RDSDBInstanceName"
@@ -337,9 +356,6 @@
 					},
 					"DBMasterPassword": {
 						"Ref": "DBMasterPassword"
-					},
-					"HighAvailability": {
-						"Ref": "HighAvailability"
 					},
 					"EC2InstanceType": {
 						"Ref": "EC2InstanceType"
@@ -351,7 +367,7 @@
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
-					"Fn::Sub": "https://aws-quickstart.s3.amazonaws.com/connect-integration-acqueon/templates/aec-ami.json"
+					"Fn::Sub": "https://s3.amazonaws.com/prakashtemplatetest/aec-ami.json"
 				},
 				"Parameters": {
 					"EC2InstanceType": {
@@ -373,32 +389,46 @@
 						"Ref": "DomainHostedZone"
 					},
 					"AECSubnetPublic1": {
-						"Fn::GetAtt": ["VPCStack",
-						"Outputs.PublicSubnet1ID"]
+						"Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.PublicSubnet1ID"
+						]
 					},
 					"AECSubnetPublic2": {
-						"Fn::GetAtt": ["VPCStack",
-						"Outputs.PublicSubnet2ID"]
+						"Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.PublicSubnet2ID"
+						]
 					},
 					"AECWeb": {
-						"Fn::GetAtt": ["SecurityStack",
-						"Outputs.AECWeb"]
+						"Fn::GetAtt": [
+							"SecurityStack",
+							"Outputs.AECWeb"
+						]
 					},
 					"AECSubnetPrivate1": {
-						"Fn::GetAtt": ["VPCStack",
-						"Outputs.PrivateSubnet1AID"]
+						"Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.PrivateSubnet1AID"
+						]
 					},
 					"AECSubnetPrivate2": {
-						"Fn::GetAtt": ["VPCStack",
-						"Outputs.PrivateSubnet2AID"]
+						"Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.PrivateSubnet2AID"
+						]
 					},
 					"AECPrivateGroup": {
-						"Fn::GetAtt": ["SecurityStack",
-						"Outputs.AECPrivateGroup"]
+						"Fn::GetAtt": [
+							"SecurityStack",
+							"Outputs.AECPrivateGroup"
+						]
 					},
 					"AECVPC": {
-						"Fn::GetAtt": ["VPCStack",
-						"Outputs.VPCID"]
+						"Fn::GetAtt": [
+							"VPCStack",
+							"Outputs.VPCID"
+						]
 					},
 					"DBMasterUser": {
 						"Ref": "DBMasterUser"
@@ -407,15 +437,16 @@
 						"Ref": "DBMasterPassword"
 					},
 					"AECRDP": {
-						"Fn::GetAtt": ["SecurityStack",
-						"Outputs.AECRDP"]
+						"Fn::GetAtt": [
+							"SecurityStack",
+							"Outputs.AECRDP"
+						]
 					},
 					"RDSDB": {
-						"Fn::GetAtt": ["RDSStack",
-						"Outputs.RDSDB"]
-					},
-					"HighAvailability": {
-						"Ref": "HighAvailability"
+						"Fn::GetAtt": [
+							"RDSStack",
+							"Outputs.RDSDB"
+						]
 					}
 				}
 			}
@@ -424,103 +455,147 @@
 	"Outputs": {
 		"AECRDSEndpoint": {
 			"Value": {
-				"Fn::GetAtt": ["RDSStack",
-				"Outputs.RDSDB"]
+				"Fn::GetAtt": [
+					"RDSStack",
+					"Outputs.RDSDB"
+				]
 			},
 			"Description": "AEC RDS Database Endpoint Address"
 		},
 		"AECHostURL": {
 			"Value": {
-				"Fn::Join": ["",
-				[{
-					"Fn::If": ["HasHttps",
-					"https://",
-					"http://"]
-				},
-				{
-					"Fn::If": ["HasHttps",
-					{
-						"Ref": "CFDomainName"
-					},
-					{
-						"Fn::GetAtt": ["AMIStack",
-						"Outputs.cfdistributionDomainName"]
-					}]
-				},
-				"/LCMConsole"]]
+				"Fn::Join": [
+					"",
+					[
+						{
+							"Fn::If": [
+								"HasHttps",
+								"https://",
+								"http://"
+							]
+						},
+						{
+							"Fn::If": [
+								"HasHttps",
+								{
+									"Ref": "CFDomainName"
+								},
+								{
+									"Fn::GetAtt": [
+										"AMIStack",
+										"Outputs.cfdistributionDomainName"
+									]
+								}
+							]
+						},
+						"/LCMConsole"
+					]
+				]
 			},
 			"Description": "AEC Console Host URL"
 		},
 		"AECTenantURL": {
 			"Value": {
-				"Fn::Join": ["",
-				[{
-					"Fn::If": ["HasHttps",
-					"https://",
-					"http://"]
-				},
-				{
-					"Fn::If": ["HasHttps",
-					{
-						"Ref": "CFDomainName"
-					},
-					{
-						"Fn::GetAtt": ["AMIStack",
-						"Outputs.cfdistributionDomainName"]
-					}]
-				},
-				"/instance1LCMConsole"]]
+				"Fn::Join": [
+					"",
+					[
+						{
+							"Fn::If": [
+								"HasHttps",
+								"https://",
+								"http://"
+							]
+						},
+						{
+							"Fn::If": [
+								"HasHttps",
+								{
+									"Ref": "CFDomainName"
+								},
+								{
+									"Fn::GetAtt": [
+										"AMIStack",
+										"Outputs.cfdistributionDomainName"
+									]
+								}
+							]
+						},
+						"/instance1LCMConsole"
+					]
+				]
 			},
 			"Description": "AEC Console Tenant URL"
 		},
 		"AECAgentClientURL": {
 			"Value": {
-				"Fn::Join": ["",
-				[{
-					"Fn::If": ["HasHttps",
-					"https://",
-					"http://"]
-				},
-				{
-					"Fn::If": ["HasHttps",
-					{
-						"Ref": "CFDomainName"
-					},
-					{
-						"Fn::GetAtt": ["AMIStack",
-						"Outputs.cfdistributionDomainName"]
-					}]
-				},
-				"/instance1LCMAgentClient/CCAD.htm"]]
+				"Fn::Join": [
+					"",
+					[
+						{
+							"Fn::If": [
+								"HasHttps",
+								"https://",
+								"http://"
+							]
+						},
+						{
+							"Fn::If": [
+								"HasHttps",
+								{
+									"Ref": "CFDomainName"
+								},
+								{
+									"Fn::GetAtt": [
+										"AMIStack",
+										"Outputs.cfdistributionDomainName"
+									]
+								}
+							]
+						},
+						"/instance1LCMAgentClient/CCAD.htm"
+					]
+				]
 			},
 			"Description": "AEC Agent Client URL"
 		},
 		"AECUserRegConsole": {
 			"Value": {
-				"Fn::Join": ["",
-				[{
-					"Fn::If": ["HasHttps",
-					"https://",
-					"http://"]
-				},
-				{
-					"Fn::If": ["HasHttps",
-					{
-						"Ref": "CFDomainName"
-					},
-					{
-						"Fn::GetAtt": ["AMIStack",
-						"Outputs.cfdistributionDomainName"]
-					}]
-				},
-				"/AECInstanceConsole"]]
+				"Fn::Join": [
+					"",
+					[
+						{
+							"Fn::If": [
+								"HasHttps",
+								"https://",
+								"http://"
+							]
+						},
+						{
+							"Fn::If": [
+								"HasHttps",
+								{
+									"Ref": "CFDomainName"
+								},
+								{
+									"Fn::GetAtt": [
+										"AMIStack",
+										"Outputs.cfdistributionDomainName"
+									]
+								}
+							]
+						},
+						"/AECInstanceConsole"
+					]
+				]
 			},
 			"Description": "AEC User Registration Console URL"
 		},
 		"AECBastionIp": {
 			"Value": {
-				"Fn::GetAtt": ["AMIStack",
-				"Outputs.BastionEC2InstancePublicIp"]
+				"Fn::GetAtt": [
+					"AMIStack",
+					"Outputs.BastionEC2InstancePublicIp"
+				]
 			},
 			"Description": "AEC Bastion Host Public IP"
 		}
