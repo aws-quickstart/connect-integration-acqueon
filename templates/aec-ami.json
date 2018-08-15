@@ -229,63 +229,63 @@
         },
         "RegionMap": {
             "us-east-1": {
-                "asimg": "ami-0f4c695fd8445c0e1",
-                "bastionimg": "ami-0327667c	"
+                "asimg": "ami-012cc189997301fa4",
+                "bastionimg": "ami-0327667c"
             },
             "us-east-2": {
-                "asimg": "ami-06e8f20ffc96a4645",
+                "asimg": "ami-0af052d34eb909c12",
                 "bastionimg": "ami-3bfac45e"
             },
             "us-west-1": {
-                "asimg": "ami-002cfb5216ff28160",
+                "asimg": "ami-0f655a69cf466dc11",
                 "bastionimg": "ami-b236d2d1"
             },
             "us-west-2": {
-                "asimg": "ami-0496f7129db464e84",
+                "asimg": "ami-00e22ee023260dea2",
                 "bastionimg": "ami-3703414f"
             },
             "ap-south-1": {
-                "asimg": "ami-0891aa7ada43108dc",
+                "asimg": "ami-028957acdf096e3d8",
                 "bastionimg": "ami-5f95bd30"
             },
             "ap-northeast-2": {
-                "asimg": "ami-0e1462902399cbfc1",
+                "asimg": "ami-05c8d48a9db129a14",
                 "bastionimg": "ami-7969c317"
             },
             "ap-southeast-1": {
-                "asimg": "ami-0aed2c7b297e1ee4a",
+                "asimg": "ami-0964747a7e782b7aa",
                 "bastionimg": "ami-053d3a79"
             },
             "ap-southeast-2": {
-                "asimg": "ami-0066ecd19ec238273",
+                "asimg": "ami-031c5eb5e7239a23e",
                 "bastionimg": "ami-42f02f20"
             },
             "ap-northeast-1": {
-                "asimg": "ami-05a3299aedc046ede",
+                "asimg": "ami-0d34aee7452e1ef86",
                 "bastionimg": "ami-120cc36d"
             },
             "ca-central-1": {
-                "asimg": "ami-09c30501f9b5da287",
+                "asimg": "ami-071e2fe6ce66a1119",
                 "bastionimg": "ami-140b8870"
             },
             "eu-central-1": {
-                "asimg": "ami-08902bffb18c2cbff",
+                "asimg": "ami-0dec98f9e5409d82a",
                 "bastionimg": "ami-63f5c688"
             },
             "eu-west-1": {
-                "asimg": "ami-077174156290afed8",
+                "asimg": "ami-0455a051c140f7da5",
                 "bastionimg": "ami-987a76e1"
             },
             "eu-west-2": {
-                "asimg": "ami-08b83147db80249a3",
+                "asimg": "ami-008d4fa5a6de602cb",
                 "bastionimg": "ami-479b7520"
             },
             "eu-west-3": {
-                "asimg": "ami-0327b2819272d7fc1",
+                "asimg": "ami-069d3c264a8009e07",
                 "bastionimg": "ami-1511a068"
             },
             "sa-east-1": {
-                "asimg": "ami-0ee0981fa59a3224f",
+                "asimg": "ami-03a7ad8f4e53996a4",
                 "bastionimg": "ami-ff6e3593"
             }
         }
