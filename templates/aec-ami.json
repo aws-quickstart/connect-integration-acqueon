@@ -9,7 +9,8 @@
                         "default": "Amazon EC2 Configuration"
                     },
                     "Parameters": [
-                        "EC2InstanceType",
+                        "AECType",
+						"EC2InstanceType",
                         "KeyPairName",
                         "AECVPC",
                         "AECSubnetPublic1",
@@ -101,7 +102,10 @@
                 },
                 "ELBCertificate": {
                     "default": "ELB Certificate ARN"
-                }
+                },
+				"AECType": {
+				    "default": "AECType"
+				}
             }
         }
     },
@@ -182,7 +186,11 @@
         "DomainHostedZone": {
             "Description": "Hosted Zone of the Domain",
             "Type": "AWS::Route53::HostedZone::Id"
-        }
+        },
+		"AECType": {
+		    "Description": "AEC installation type",
+		    "Type": "String"
+		}
     },
     "Mappings": {
         "EC2VolumeMap": {
@@ -229,63 +237,78 @@
         },
         "RegionMap": {
             "us-east-1": {
-                "asimg": "ami-012cc189997301fa4",
+                "voiceimg": "ami-0734e9ef461802b4f",
+				"omnichannelimg": "ami-04827b6e80ab8482c",
                 "bastionimg": "ami-0327667c"
             },
             "us-east-2": {
-                "asimg": "ami-0af052d34eb909c12",
+                "voiceimg": "ami-03dd66a58e6ffb17d",
+				"omnichannelimg": "ami-0c7e36ceb6cdf2758",
                 "bastionimg": "ami-3bfac45e"
             },
             "us-west-1": {
-                "asimg": "ami-0f655a69cf466dc11",
+                "voiceimg": "ami-06e2f5b7c4a1f9222",
+				"omnichannelimg": "ami-0513bae6d6d445811",
                 "bastionimg": "ami-b236d2d1"
             },
             "us-west-2": {
-                "asimg": "ami-00e22ee023260dea2",
+                "voiceimg": "ami-0434410010c03db8f",
+				"omnichannelimg": "ami-0f7a96a321c981cee",
                 "bastionimg": "ami-3703414f"
             },
             "ap-south-1": {
-                "asimg": "ami-028957acdf096e3d8",
+                "voiceimg": "ami-052f35eac555ec5a0",
+				"omnichannelimg": "ami-0985efbb87cde548f",
                 "bastionimg": "ami-5f95bd30"
             },
             "ap-northeast-2": {
-                "asimg": "ami-05c8d48a9db129a14",
+                "voiceimg": "ami-02971f7b596103209",
+				"omnichannelimg": "ami-0dd3d599c3a6da94a",
                 "bastionimg": "ami-7969c317"
             },
             "ap-southeast-1": {
-                "asimg": "ami-0964747a7e782b7aa",
+                "voiceimg": "ami-0567e223ac09d4d6f",
+				"omnichannelimg": "ami-03e5f5989ed15842a",
                 "bastionimg": "ami-053d3a79"
             },
             "ap-southeast-2": {
-                "asimg": "ami-031c5eb5e7239a23e",
+                "voiceimg": "ami-0a2704afa0f6cdfb0",
+				"omnichannelimg": "ami-02f1620d9c2473e22",
                 "bastionimg": "ami-42f02f20"
             },
             "ap-northeast-1": {
-                "asimg": "ami-0d34aee7452e1ef86",
+                "voiceimg": "ami-02e817266432da8c0",
+				"omnichannelimg": "ami-0e50816f1ff6d156b",
                 "bastionimg": "ami-120cc36d"
             },
             "ca-central-1": {
-                "asimg": "ami-071e2fe6ce66a1119",
+                "voiceimg": "ami-0cc93632490d6abe3",
+				"omnichannelimg": "ami-035ff7aa60dc53cc7",
                 "bastionimg": "ami-140b8870"
             },
             "eu-central-1": {
-                "asimg": "ami-0dec98f9e5409d82a",
+                "voiceimg": "ami-03a20f5a3f65bc665",
+				"omnichannelimg": "ami-09e22f2ad6f47238d",
                 "bastionimg": "ami-63f5c688"
             },
             "eu-west-1": {
-                "asimg": "ami-0455a051c140f7da5",
+                "voiceimg": "ami-07bb50d0334fb2316",
+				"omnichannelimg": "ami-0aeebd50c0f0c88db",
                 "bastionimg": "ami-987a76e1"
             },
             "eu-west-2": {
-                "asimg": "ami-008d4fa5a6de602cb",
+                "voiceimg": "ami-0918fa132a34f2604",
+				"omnichannelimg": "ami-0fda059a0cc591d0b",
                 "bastionimg": "ami-479b7520"
             },
             "eu-west-3": {
-                "asimg": "ami-069d3c264a8009e07",
+                "voiceimg": "ami-072ea9716f50af063",
+				"omnichannelimg": "ami-089e66a898efb1f1d",
                 "bastionimg": "ami-1511a068"
             },
             "sa-east-1": {
-                "asimg": "ami-03a7ad8f4e53996a4",
+                "voiceimg": "ami-00429c2538c2872d1",
+				"omnichannelimg": "ami-0a4151f7282b51773",
                 "bastionimg": "ami-ff6e3593"
             }
         }
@@ -338,7 +361,15 @@
                     "Ref": "AWS::Region"
                 }
             ]
-        }
+        },
+		"IsOmnichannel": {
+		    "Fn::Equals": [
+			    "Omnichannel",
+				{
+				    "Ref": "AECType"
+				}
+			]
+		}	
     },
     "Resources": {
         "AECLB": {
@@ -872,13 +903,27 @@
             "Type": "AWS::AutoScaling::LaunchConfiguration",
             "Properties": {
                 "ImageId": {
-                    "Fn::FindInMap": [
-                        "RegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "asimg"
-                    ]
+				    "Fn::If": [
+                        "IsOmnichannel",
+						{
+						    "Fn::FindInMap": [
+							    "RegionMap",
+								{
+								    "Ref": "AWS::Region"
+								},
+								"omnichannelimg"
+							]
+						},
+						{
+						    "Fn::FindInMap": [
+							    "RegionMap",
+								{
+								    "Ref": "AWS::Region"
+								},
+								"voiceimg"
+							]
+						}
+					]
                 },
                 "InstanceType": {
                     "Fn::If": [

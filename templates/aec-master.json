@@ -23,6 +23,7 @@
 					"default": "Amazon EC2 Configuration"
 				},
 				"Parameters": [
+					"AECType",
 					"EC2InstanceType",
 					"RDPFrom"
 				]
@@ -97,6 +98,9 @@
 				},
 				"ELBCertificate": {
 					"default": "ELB Certificate ARN"
+				},
+				"AECType": {
+					"default": "AEC Type"
 				}
 			}
 		}
@@ -178,6 +182,15 @@
 			"MinLength": "8",
 			"MaxLength": "25",
 			"NoEcho": true
+		},
+		"AECType": {
+			"Type": "String",
+			"Default": "Voice",
+			"AllowedValues": [
+				"Voice",
+				"Omnichannel"
+			],
+			"Description": "AEC installation type"
 		},
 		"EC2InstanceType": {
 			"Type": "String",
@@ -447,6 +460,9 @@
 							"RDSStack",
 							"Outputs.RDSDB"
 						]
+					},
+					"AECType": {
+						"Ref": "AECType"
 					}
 				}
 			}
