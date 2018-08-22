@@ -1,7 +1,7 @@
 global:
   marketplace-ami: false
   owner: aec@acqueon.com
-  qsname: aec-modules
+  qsname: connect-integration-acqueon
   regions: 
     - us-east-2
     - us-east-1
