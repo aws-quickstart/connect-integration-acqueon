@@ -23,5 +23,5 @@ tests:
     regions:
       - us-east-1
     parameter_input: txl-input.json
-    template_file: aec-master.template
+    template_file: aec-master.json
  
