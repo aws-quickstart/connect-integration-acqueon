@@ -237,123 +237,68 @@
         },
         "RegionMap": {
             "us-east-1": {
-                "voiceimg": "ami-0734e9ef461802b4f",
-				"omnichannelimg": "ami-04827b6e80ab8482c",
-                "bastionimg": "ami-0327667c"
+                "voiceimg": "ami-0c51b16b6147f9de9",
+				"omnichannelimg": "ami-00e77d12b3ffcf5da"
             },
             "us-east-2": {
-                "voiceimg": "ami-03dd66a58e6ffb17d",
-				"omnichannelimg": "ami-0c7e36ceb6cdf2758",
-                "bastionimg": "ami-3bfac45e"
+                "voiceimg": "ami-0c819ea43fd0f2f47",
+				"omnichannelimg": "ami-01bf0174714e4d303"
             },
             "us-west-1": {
-                "voiceimg": "ami-06e2f5b7c4a1f9222",
-				"omnichannelimg": "ami-0513bae6d6d445811",
-                "bastionimg": "ami-b236d2d1"
+                "voiceimg": "ami-0397e55c5afd84705",
+				"omnichannelimg": "ami-0caa0ae6a4afaac14"
             },
             "us-west-2": {
-                "voiceimg": "ami-0434410010c03db8f",
-				"omnichannelimg": "ami-0f7a96a321c981cee",
-                "bastionimg": "ami-3703414f"
+                "voiceimg": "ami-073116e752fe0ffce",
+				"omnichannelimg": "ami-0810b600906d524d6"
             },
             "ap-south-1": {
-                "voiceimg": "ami-052f35eac555ec5a0",
-				"omnichannelimg": "ami-0985efbb87cde548f",
-                "bastionimg": "ami-5f95bd30"
+                "voiceimg": "ami-0ca071cd66462a43a",
+				"omnichannelimg": "ami-0accb3d9937aa0640"
             },
             "ap-northeast-2": {
-                "voiceimg": "ami-02971f7b596103209",
-				"omnichannelimg": "ami-0dd3d599c3a6da94a",
-                "bastionimg": "ami-7969c317"
+                "voiceimg": "ami-0b3fc160c3d515d94",
+				"omnichannelimg": "ami-0be0f4b41928a04a5"
             },
             "ap-southeast-1": {
-                "voiceimg": "ami-0567e223ac09d4d6f",
-				"omnichannelimg": "ami-03e5f5989ed15842a",
-                "bastionimg": "ami-053d3a79"
+                "voiceimg": "ami-072fe78eb4744711e",
+				"omnichannelimg": "ami-0a3737c5936d2b155"
             },
             "ap-southeast-2": {
-                "voiceimg": "ami-0a2704afa0f6cdfb0",
-				"omnichannelimg": "ami-02f1620d9c2473e22",
-                "bastionimg": "ami-42f02f20"
+                "voiceimg": "ami-0c0c9bc456c78765c",
+				"omnichannelimg": "ami-0f630662cd9befbed"
             },
             "ap-northeast-1": {
-                "voiceimg": "ami-02e817266432da8c0",
-				"omnichannelimg": "ami-0e50816f1ff6d156b",
-                "bastionimg": "ami-120cc36d"
+                "voiceimg": "ami-0cf84885c98ffc46b",
+				"omnichannelimg": "ami-074b781e4bd8a441d"
             },
             "ca-central-1": {
-                "voiceimg": "ami-0cc93632490d6abe3",
-				"omnichannelimg": "ami-035ff7aa60dc53cc7",
-                "bastionimg": "ami-140b8870"
+                "voiceimg": "ami-036167cbb2eee0a23",
+				"omnichannelimg": "ami-03c904e0158bf0d26"
             },
             "eu-central-1": {
-                "voiceimg": "ami-03a20f5a3f65bc665",
-				"omnichannelimg": "ami-09e22f2ad6f47238d",
-                "bastionimg": "ami-63f5c688"
+                "voiceimg": "ami-0a429fa96854aba8b",
+				"omnichannelimg": "ami-0da84335cd72e58d0"
             },
             "eu-west-1": {
-                "voiceimg": "ami-07bb50d0334fb2316",
-				"omnichannelimg": "ami-0aeebd50c0f0c88db",
-                "bastionimg": "ami-987a76e1"
+                "voiceimg": "ami-00ff9e9600ed88e65",
+				"omnichannelimg": "ami-0841d1bae1991dbe3"
             },
             "eu-west-2": {
-                "voiceimg": "ami-0918fa132a34f2604",
-				"omnichannelimg": "ami-0fda059a0cc591d0b",
-                "bastionimg": "ami-479b7520"
+                "voiceimg": "ami-024f3e78eac42c508",
+				"omnichannelimg": "ami-04e6443e7516db527"
             },
             "eu-west-3": {
-                "voiceimg": "ami-072ea9716f50af063",
-				"omnichannelimg": "ami-089e66a898efb1f1d",
-                "bastionimg": "ami-1511a068"
+                "voiceimg": "ami-0852e8aa120eeb048",
+				"omnichannelimg": "ami-0791ca60077e9fd53"
             },
             "sa-east-1": {
-                "voiceimg": "ami-00429c2538c2872d1",
-				"omnichannelimg": "ami-0a4151f7282b51773",
-                "bastionimg": "ami-ff6e3593"
+                "voiceimg": "ami-0424904305c665842",
+				"omnichannelimg": "ami-00039c259c0889599"
             }
         }
     },
     "Conditions": {
-        "HasHttps": {
-            "Fn::And": [
-                {
-                    "Fn::Not": [
-                        {
-                            "Fn::Equals": [
-                                "",
-                                {
-                                    "Ref": "CFDomainName"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "Fn::Not": [
-                        {
-                            "Fn::Equals": [
-                                "",
-                                {
-                                    "Ref": "CFCertificate"
-                                }
-                            ]
-                        }
-                    ]
-                },
-                {
-                    "Fn::Not": [
-                        {
-                            "Fn::Equals": [
-                                "",
-                                {
-                                    "Ref": "ELBCertificate"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
         "West3Region": {
             "Fn::Equals": [
                 "eu-west-3",
@@ -775,35 +720,15 @@
                 "LoadBalancerArn": {
                     "Ref": "AECLB"
                 },
-                "Port": {
-                    "Fn::If": [
-                        "HasHttps",
-                        "443",
-                        "80"
-                    ]
-                },
-                "Protocol": {
-                    "Fn::If": [
-                        "HasHttps",
-                        "HTTPS",
-                        "HTTP"
-                    ]
-                },
-                "Certificates": {
-                    "Fn::If": [
-                        "HasHttps",
-                        [
-                            {
-                                "CertificateArn": {
-                                    "Ref": "ELBCertificate"
-                                }
-                            }
-                        ],
-                        {
-                            "Ref": "AWS::NoValue"
-                        }
-                    ]
-                }
+                "Port": "443",
+                "Protocol": "HTTPS",
+                "Certificates": [
+					{
+						"CertificateArn": {
+							"Ref": "ELBCertificate"
+						}
+					}
+				]
             }
         },
         "ServiceLBListener": {
@@ -981,28 +906,11 @@
                                 "$text = '{",
                                 "\"PUBLIC_ELB_DNS\":\"",
                                 {
-                                    "Fn::If": [
-                                        "HasHttps",
-                                        {
-                                            "Ref": "CFDomainName"
-                                        },
-                                        {
-                                            "Fn::GetAtt": [
-                                                "cfdistribution",
-                                                "DomainName"
-                                            ]
-                                        }
-                                    ]
-                                },
+									"Ref": "CFDomainName"
+								},
                                 "\",",
                                 "\"PUBLIC_ELB_PROTOCOL\":\"",
-                                {
-                                    "Fn::If": [
-                                        "HasHttps",
-                                        "https",
-                                        "http"
-                                    ]
-                                },
+                                "https",
                                 "\",",
                                 "\"PRIVATE_ELB_DNS\":\"",
                                 {
@@ -1110,124 +1018,26 @@
                 ]
             }
         },
-        "BastionEC2Instance": {
-            "Type": "AWS::EC2::Instance",
-            "Properties": {
-                "ImageId": {
-                    "Fn::FindInMap": [
-                        "RegionMap",
-                        {
-                            "Ref": "AWS::Region"
-                        },
-                        "bastionimg"
-                    ]
-                },
-                "InstanceType": "t2.micro",
-                "KeyName": {
-                    "Ref": "KeyPairName"
-                },
-                "NetworkInterfaces": [
-                    {
-                        "GroupSet": [
-                            {
-                                "Ref": "AECRDP"
-                            }
-                        ],
-                        "AssociatePublicIpAddress": "true",
-                        "DeviceIndex": "0",
-                        "SubnetId": {
-                            "Ref": "AECSubnetPublic1"
-                        }
-                    }
-                ],
-                "Tags": [
-                    {
-                        "Key": "Name",
-                        "Value": {
-                            "Fn::Join": [
-                                "-",
-                                [
-                                    "AEC-BH",
-                                    {
-                                        "Fn::Select": [
-                                            0,
-                                            {
-                                                "Fn::Split": [
-                                                    "-",
-                                                    {
-                                                        "Ref": "AWS::StackName"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    },
-                                    {
-                                        "Fn::Select": [
-                                            1,
-                                            {
-                                                "Fn::Split": [
-                                                    "-",
-                                                    {
-                                                        "Ref": "AWS::StackName"
-                                                    }
-                                                ]
-                                            }
-                                        ]
-                                    }
-                                ]
-                            ]
-                        }
-                    }
-                ]
-            }
-        },
         "cfdistribution": {
             "Type": "AWS::CloudFront::Distribution",
             "Properties": {
                 "DistributionConfig": {
-                    "Aliases": {
-                        "Fn::If": [
-                            "HasHttps",
-                            [
-                                {
-                                    "Ref": "CFDomainName"
-                                }
-                            ],
-                            {
-                                "Ref": "AWS::NoValue"
-                            }
-                        ]
-                    },
+                    "Aliases": [
+						{
+							"Ref": "CFDomainName"
+						}
+					],
                     "ViewerCertificate": {
-                        "Fn::If": [
-                            "HasHttps",
-                            {
-                                "AcmCertificateArn": {
-                                    "Ref": "CFCertificate"
-                                },
-                                "SslSupportMethod": "sni-only"
-                            },
-                            {
-                                "Ref": "AWS::NoValue"
-                            }
-                        ]
+                        "AcmCertificateArn": {
+							"Ref": "CFCertificate"
+						},
+						"SslSupportMethod": "sni-only"
                     },
                     "Enabled": "true",
                     "Origins": [
                         {
                             "DomainName": {
-                                "Fn::If": [
-                                    "HasHttps",
-                                    {
-                                        "Ref": "AECLBARecord"
-                                    },
-                                    {
-                                        "Fn::GetAtt": [
-                                            "AECLB",
-                                            "DNSName"
-                                        ]
-                                    }
-                                ]
+                                "Ref": "AECLBARecord"
                             },
                             "Id": "AECOrigin",
                             "CustomOriginConfig": {
@@ -1259,20 +1069,13 @@
                             }
                         },
                         "TargetOriginId": "AECOrigin",
-                        "ViewerProtocolPolicy": {
-                            "Fn::If": [
-                                "HasHttps",
-                                "redirect-to-https",
-                                "allow-all"
-                            ]
-                        }
+                        "ViewerProtocolPolicy": "redirect-to-https"
                     }
                 }
             }
         },
         "AECLBARecord": {
             "Type": "AWS::Route53::RecordSet",
-            "Condition": "HasHttps",
             "Properties": {
                 "AliasTarget": {
                     "DNSName": {
@@ -1307,7 +1110,6 @@
         },
         "CFARecord": {
             "Type": "AWS::Route53::RecordSet",
-            "Condition": "HasHttps",
             "Properties": {
                 "AliasTarget": {
                     "DNSName": {
@@ -1334,14 +1136,6 @@
                 "Fn::GetAtt": [
                     "cfdistribution",
                     "DomainName"
-                ]
-            }
-        },
-        "BastionEC2InstancePublicIp": {
-            "Value": {
-                "Fn::GetAtt": [
-                    "BastionEC2Instance",
-                    "PublicIp"
                 ]
             }
         }
