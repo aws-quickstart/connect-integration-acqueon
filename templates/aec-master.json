@@ -227,46 +227,6 @@
 		}
 	},
 	"Conditions": {
-		"HasHttps": {
-			"Fn::And": [
-				{
-					"Fn::Not": [
-						{
-							"Fn::Equals": [
-								"",
-								{
-									"Ref": "CFDomainName"
-								}
-							]
-						}
-					]
-				},
-				{
-					"Fn::Not": [
-						{
-							"Fn::Equals": [
-								"",
-								{
-									"Ref": "CFCertificate"
-								}
-							]
-						}
-					]
-				},
-				{
-					"Fn::Not": [
-						{
-							"Fn::Equals": [
-								"",
-								{
-									"Ref": "ELBCertificate"
-								}
-							]
-						}
-					]
-				}
-			]
-		},
 		"West3Region": {
 			"Fn::Equals": [
 				"eu-west-3",
@@ -274,23 +234,88 @@
 					"Ref": "AWS::Region"
 				}
 			]
-		},
-		"NotUSWest1Region": {
-			"Fn::Not": [
-				{
-					"Fn::Equals": [
-						"us-west-1",
+		}
+	},
+	"Rules" : {
+		"west1region" : {
+			"Assertions" : [
+			  {
+				"Assert" :  {
+					"Fn::Not": [
 						{
-							"Ref": "AWS::Region"
+							"Fn::Equals": [
+								"us-west-1",
+								{
+									"Ref": "AWS::Region"
+								}
+							]
 						}
 					]
-				}
+				},
+				"AssertDescription" : "us-west-1 region is not supported."
+			  }
+			]
+		},
+		"CheckDomainName" : {
+			"Assertions" : [
+			  {
+				"Assert" :  {
+					"Fn::Not": [
+						{
+							"Fn::Equals": [
+								{
+									"Ref": "CFDomainName"
+								},
+								""
+							]
+						}
+					]
+				},
+				"AssertDescription" : "Cloudfront domain name cannot be empty."
+			  }
+			]
+		},
+		"CheckCFCertificate" : {
+			"Assertions" : [
+			  {
+				"Assert" :  {
+					"Fn::Not": [
+						{
+							"Fn::Equals": [
+								{
+									"Ref": "CFCertificate"
+								},
+								""
+							]
+						}
+					]
+				},
+				"AssertDescription" : "Cloudfront certificate cannot be empty."
+			  }
+			]
+		},
+		"CheckELBCertificate" : {
+			"Assertions" : [
+			  {
+				"Assert" :  {
+					"Fn::Not": [
+						{
+							"Fn::Equals": [
+								{
+									"Ref": "ELBCertificate"
+								},
+								""
+							]
+						}
+					]
+				},
+				"AssertDescription" : "ELB certificate cannot be empty."
+			  }
 			]
 		}
 	},
 	"Resources": {
 		"VPCStack": {
-			"Condition": "NotUSWest1Region",
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
@@ -328,7 +353,6 @@
 			}
 		},
 		"SecurityStack": {
-			"Condition": "NotUSWest1Region",
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
@@ -351,7 +375,6 @@
 			}
 		},
 		"RDSStack": {
-			"Condition": "NotUSWest1Region",
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
@@ -392,7 +415,6 @@
 			}
 		},
 		"AMIStack": {
-			"Condition": "NotUSWest1Region",
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
 				"TemplateURL": {
@@ -485,197 +507,74 @@
 		}
 	},
 	"Outputs": {
-		"AECStatus": {
-			"Value": {
-				"Fn::If": [
-					"NotUSWest1Region",
-					"Stack created successfully",
-					"AEC stack not supported in US-WEST-1 region"
-				]
-			},
-			"Description": "AEC stack creation status"
-		},
 		"AECRDSEndpoint": {
 			"Value": {
-				"Fn::If": [
-					"NotUSWest1Region",
-					{
-						"Fn::GetAtt": [
-							"RDSStack",
-							"Outputs.RDSDB"
-						]
-					},
-					"Region not supported."
+				"Fn::GetAtt": [
+					"RDSStack",
+					"Outputs.RDSDB"
 				]
 			},
 			"Description": "AEC RDS Database Endpoint Address"
 		},
 		"AECHostURL": {
 			"Value": {
-				"Fn::If": [
-					"NotUSWest1Region",
-					{
-						"Fn::Join": [
-							"",
-							[
-								{
-									"Fn::If": [
-										"HasHttps",
-										"https://",
-										"http://"
-									]
-								},
-								{
-									"Fn::If": [
-										"HasHttps",
-										{
-											"Ref": "CFDomainName"
-										},
-										{
-											"Fn::GetAtt": [
-												"AMIStack",
-												"Outputs.cfdistributionDomainName"
-											]
-										}
-									]
-								},
-								"/LCMConsole"
-							]
-						]
-					},
-					"Region not supported."
+				"Fn::Join": [
+					"",
+					[
+						"https://",
+						{
+							"Ref": "CFDomainName"
+						},
+						"/LCMConsole"
+					]
 				]
 			},
 			"Description": "AEC Console Host URL"
 		},
 		"AECTenantURL": {
 			"Value": {
-				"Fn::If": [
-					"NotUSWest1Region",
-					{
-						"Fn::Join": [
-							"",
-							[
-								{
-									"Fn::If": [
-										"HasHttps",
-										"https://",
-										"http://"
-									]
-								},
-								{
-									"Fn::If": [
-										"HasHttps",
-										{
-											"Ref": "CFDomainName"
-										},
-										{
-											"Fn::GetAtt": [
-												"AMIStack",
-												"Outputs.cfdistributionDomainName"
-											]
-										}
-									]
-								},
-								"/instance1LCMConsole"
-							]
-						]
-					},
-					"Region not supported."
+				"Fn::Join": [
+					"",
+					[
+						"https://",
+						{
+							"Ref": "CFDomainName"
+						},
+						"/instance1LCMConsole"
+					]
 				]
 			},
 			"Description": "AEC Console Tenant URL"
 		},
 		"AECAgentClientURL": {
 			"Value": {
-				"Fn::If": [
-					"NotUSWest1Region",
-					{
-						"Fn::Join": [
-							"",
-							[
-								{
-									"Fn::If": [
-										"HasHttps",
-										"https://",
-										"http://"
-									]
-								},
-								{
-									"Fn::If": [
-										"HasHttps",
-										{
-											"Ref": "CFDomainName"
-										},
-										{
-											"Fn::GetAtt": [
-												"AMIStack",
-												"Outputs.cfdistributionDomainName"
-											]
-										}
-									]
-								},
-								"/instance1LCMAgentClient/CCAD.htm"
-							]
-						]
-					},
-					"Region not supported."
+				"Fn::Join": [
+					"",
+					[
+						"https://",
+						{
+							"Ref": "CFDomainName"
+						},
+						"/instance1LCMAgentClient/CCAD.htm"
+					]
 				]
 			},
 			"Description": "AEC Agent Client URL"
 		},
 		"AECUserRegConsole": {
 			"Value": {
-				"Fn::If": [
-					"NotUSWest1Region",
-					{
-						"Fn::Join": [
-							"",
-							[
-								{
-									"Fn::If": [
-										"HasHttps",
-										"https://",
-										"http://"
-									]
-								},
-								{
-									"Fn::If": [
-										"HasHttps",
-										{
-											"Ref": "CFDomainName"
-										},
-										{
-											"Fn::GetAtt": [
-												"AMIStack",
-												"Outputs.cfdistributionDomainName"
-											]
-										}
-									]
-								},
-								"/AECInstanceConsole"
-							]
-						]
-					},
-					"Region not supported."
+				"Fn::Join": [
+					"",
+					[
+						"https://",
+						{
+							"Ref": "CFDomainName"
+						},
+						"/AECInstanceConsole"
+					]
 				]
 			},
 			"Description": "AEC User Registration Console URL"
-		},
-		"AECBastionIp": {
-			"Value": {
-				"Fn::If": [
-					"NotUSWest1Region",
-					{
-						"Fn::GetAtt": [
-							"AMIStack",
-							"Outputs.BastionEC2InstancePublicIp"
-						]
-					},
-					"Region not supported."
-				]
-			},
-			"Description": "AEC Bastion Host Public IP"
 		}
 	}
 }
