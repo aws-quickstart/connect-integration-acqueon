@@ -1,0 +1,43 @@
+project:
+  name: connect-integration-acqueon
+  owner: aec@acqueon.com
+  package_lambda: false
+  regions:
+  - us-east-2
+  # - us-east-1
+  # - us-west-2
+  # - ap-northeast-1
+  # - ap-northeast-2
+  # - ap-south-1
+  # - ap-southeast-1
+  # - ap-southeast-2
+  # - ca-central-1
+  # - eu-central-1
+  # - eu-west-1
+  # - eu-west-2
+  # - eu-west-3
+  # - sa-east-1
+tests:
+  aec-txl:
+    parameters:
+      AvailabilityZones: $[taskcat_genaz_2]
+      CFCertificate: ''
+      CFDomainName: ''
+      DBMasterPassword: $[taskcat_genpass_8A]
+      DBMasterUser: $[taskcat_random-string]
+      DomainHostedZone: Z194S639HK6ITV
+      EC2InstanceType: Option-1a
+      ELBCertificate: ''
+      KeyPairName: AEC-KeyPair
+      PrivateSubnet1CIDR: 10.100.3.0/24
+      PrivateSubnet2CIDR: 10.100.4.0/24
+      PublicSubnet1CIDR: 10.100.1.0/24
+      PublicSubnet2CIDR: 10.100.2.0/24
+      RDPFrom: 0.0.0.0/0
+      RDSDBInstanceName: AEC-dbinstance1
+      VPCCIDR: 10.100.0.0/16
+      QSS3BucketName: $[taskcat_autobucket]
+      QSS3BucketRegion: $[taskcat_current_region]
+    regions:
+    - us-east-1
+    template: templates/aec-master.template.yaml
